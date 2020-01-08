@@ -32,7 +32,7 @@ RUN apk add --update --no-cache --virtual build-dependencies \
     git checkout ${BITLBEE_COMMIT}; \
     cp bitlbee.conf /bitlbee.conf; \
     mkdir /bitlbee-data; \
-    ./configure --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --debug=0 --events=libevent --ldap=1 --otr=plugin --purple=1 --config=/bitlbee-data; \
+    ./configure --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --debug=0 --events=libevent --purple=0 --ldap=1 --jabber=1 --twitter=1 --config=/bitlbee-data; \
     make; \
     make install; \
     make install-dev; \
