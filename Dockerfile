@@ -32,9 +32,9 @@ RUN apk add --update --no-cache --virtual build-dependencies \
     git checkout ${BITLBEE_COMMIT}; \
     cp bitlbee.conf /bitlbee.conf; \
     mkdir /bitlbee-data; \
-    ./configure --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --events=libevent --otr=plugin --ssl=gnutls --config=/bitlbee-data; \
-    make; \
-    make install install-bin install-etc install-plugin-otr; \
+    PYTHON=/usr/bin/python3 ./configure --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --events=libevent --otr=plugin --ssl=gnutls --jabber=1 --twitter=1 --plugins=1 --doc=1 --purple=0 --config=/bitlbee-data && \
+    make && \
+    make install install-bin install-etc install-plugin-otr install-dev; \
     adduser -u 1000 -S bitlbee; \
     addgroup -g 1000 -S bitlbee; \
     chown -R bitlbee:bitlbee /bitlbee-data; \
