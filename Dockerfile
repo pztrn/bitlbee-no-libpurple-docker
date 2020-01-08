@@ -13,8 +13,7 @@ ENV BITLBEE_COMMIT=3a547ee9dcf5c790f68ee2118389dd27ed471b23 \
     libevent \
     libgcrypt \
     libotr \
-    libsasl \
-    openldap"
+    libsasl"
 
 # bitlbee
 RUN apk add --update --no-cache --virtual build-dependencies \
@@ -23,8 +22,9 @@ RUN apk add --update --no-cache --virtual build-dependencies \
     glib-dev \
     gnutls-dev \
     libevent-dev \
+    libgcrypt-dev \
     libotr-dev \
-    openldap-dev; \
+    python3 ; \
     apk add --no-cache --virtual runtime-dependencies ${RUNTIME_DEPS}; \
     cd /root; \
     git clone -n https://github.com/bitlbee/bitlbee; \
@@ -32,11 +32,9 @@ RUN apk add --update --no-cache --virtual build-dependencies \
     git checkout ${BITLBEE_COMMIT}; \
     cp bitlbee.conf /bitlbee.conf; \
     mkdir /bitlbee-data; \
-    ./configure --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --debug=0 --events=libevent --purple=0 --ldap=1 --jabber=1 --twitter=1 --config=/bitlbee-data; \
+    ./configure --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --events=libevent --otr=plugin --ssl=gnutls --config=/bitlbee-data; \
     make; \
-    make install; \
-    make install-dev; \
-    make install-etc; \
+    make install install-bin install-etc install-plugin-otr; \
     adduser -u 1000 -S bitlbee; \
     addgroup -g 1000 -S bitlbee; \
     chown -R bitlbee:bitlbee /bitlbee-data; \
