@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM code.pztrn.name/containers/mirror/alpine:3.16.0
 
 ENV BITLBEE_COMMIT=3a547ee9dcf5c790f68ee2118389dd27ed471b23 \
     RUNTIME_DEPS=" \
@@ -6,7 +6,6 @@ ENV BITLBEE_COMMIT=3a547ee9dcf5c790f68ee2118389dd27ed471b23 \
     cyrus-sasl-crammd5 \
     cyrus-sasl-digestmd5 \
     cyrus-sasl-scram \
-    cyrus-sasl-plain \
     glib \
     gnutls \
     json-glib \
